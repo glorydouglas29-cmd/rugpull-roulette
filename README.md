@@ -107,6 +107,7 @@ npx wrangler pages deploy static --project-name=rugpull-roulette
 - Data: Helius + Jupiter
 - Hosting: Cloudflare Workers + Pages
 - Built for degens, by degens
+- Deployed to Cloudflare.
 
 ## Disclaimer
 
