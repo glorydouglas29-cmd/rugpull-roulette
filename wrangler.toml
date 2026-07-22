@@ -1,0 +1,11 @@
+name = "rugpull-roulette"
+main = "src/index.js"
+compatibility_date = "2026-07-18"
+
+# KV namespace for leaderboard (create via: wrangler kv:namespace create "LEADERBOARD_KV")
+# [[kv_namespaces]]
+# binding = "LEADERBOARD_KV"
+# id = "your-kv-namespace-id"
+
+[vars]
+# Public environment variables go here

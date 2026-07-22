@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 RUGPULL ROULETTE — Solana Wallet Roast & Classify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080A0F;
+    --surface:#0E1219;
+    --surface-2:#141A24;
+    --surface-3:#1A2230;
+    --line:#232D3D;
+    --line-2:#2D3A4F;
+    --ink:#FF4D2E;
+    --ink-dim:#CC3D24;
+    --ink-glow:rgba(255,77,46,0.15);
+    --paper:#E8E4DC;
+    --muted:#5A6478;
+    --up:#22C55E;
+    --down:#EF4444;
+    --warning:#F59E0B;
+    --accent:#8B5CF6;
+    --blue:#3B82F6;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--bg);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,77,46,0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139,92,246,0.05), transparent);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:60px 60px;
+    opacity:0.15;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:900px; margin:0 auto; padding:40px 20px 80px; position:relative; z-index:1;}
+
+  header{text-align:center; margin-bottom:40px;}
+
+  .logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:800;
+    font-size:40px;
+    letter-spacing:-0.03em;
+    line-height:1;
+    margin-bottom:10px;
+    background:linear-gradient(135deg, var(--ink) 0%, #FF8A65 50%, var(--accent) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    animation:glow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow{
+    from{filter:drop-shadow(0 0 20px rgba(255,77,46,0.3));}
+    to{filter:drop-shadow(0 0 40px rgba(255,77,46,0.5));}
+  }
+
+  .tagline{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:24px;
+  }
+
+  .tagline span{color:var(--ink);}
+
+  .mode-switch{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin-bottom:28px;
+  }
+
+  .mode-btn{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:12px 28px;
+    border-radius:10px;
+    cursor:pointer;
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--muted);
+    transition:all 0.2s;
+  }
+
+  .mode-btn:hover{border-color:var(--line-2); color:var(--paper);}
+  .mode-btn.active{
+    background:linear-gradient(135deg, var(--ink), var(--ink-dim));
+    border-color:transparent;
+    color:#fff;
+    box-shadow:0 4px 16px rgba(255,77,46,0.25);
+  }
+
+  .search-panel{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:28px;
+    margin-bottom:32px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .search-row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  input[type="text"]{
+    flex:1;
+    min-width:280px;
+    background:var(--surface-2);
+    border:1px solid var(--line-2);
+    color:var(--paper);
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    padding:16px 20px;
+    border-radius:12px;
+    outline:none;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+
+  input[type="text"]:focus{
+    border-color:var(--ink);
+    box-shadow:0 0 0 3px var(--ink-glow);
+  }
+
+  input[type="text"]::placeholder{color:var(--muted);}
+
+  .action-btn{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    background:linear-gradient(135deg, var(--ink), var(--ink-dim));
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:16px 32px;
+    cursor:pointer;
+    letter-spacing:0.02em;
+    transition:all 0.2s ease;
+    white-space:nowrap;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .action-btn::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform:translateX(-100%);
+    transition:transform 0.5s;
+  }
+
+  .action-btn:hover::before{transform:translateX(100%);}
+  .action-btn:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,77,46,0.3);}
+  .action-btn:active{transform:translateY(0);}
+  .action-btn:disabled{opacity:0.5; cursor:not-allowed; transform:none;}
+
+  .hint{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:14px;
+    line-height:1.6;
+  }
+
+  .hint span{color:var(--ink);}
+
+  .loading{
+    display:none;
+    text-align:center;
+    padding:60px 20px;
+  }
+
+  .loading.show{display:block;}
+
+  .loading-text{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--paper);
+    margin-bottom:20px;
+  }
+
+  .loading-text span{
+    display:inline-block;
+    animation:bounce 0.6s infinite alternate;
+  }
+
+  .loading-text span:nth-child(2){animation-delay:0.1s;}
+  .loading-text span:nth-child(3){animation-delay:0.2s;}
+  .loading-text span:nth-child(4){animation-delay:0.3s;}
+  .loading-text span:nth-child(5){animation-delay:0.4s;}
+
+  @keyframes bounce{
+    from{transform:translateY(0); opacity:0.5;}
+    to{transform:translateY(-8px); opacity:1;}
+  }
+
+  .loading-sub{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .results{display:none;}
+  .results.show{display:block; animation:fadeIn 0.5s ease;}
+
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .class-banner{
+    background:var(--surface);
+    border:2px solid var(--line);
+    border-radius:16px;
+    padding:32px;
+    text-align:center;
+    margin-bottom:28px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .class-banner::before{
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height:4px;
+    background:linear-gradient(90deg, var(--ink), var(--accent));
+  }
+
+  .class-icon{
+    font-size:48px;
+    margin-bottom:12px;
+    display:block;
+  }
+
+  .class-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+
+  .class-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:800;
+    font-size:32px;
+    letter-spacing:-0.02em;
+    margin-bottom:12px;
+  }
+
+  .class-desc{
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    color:var(--muted);
+    max-width:500px;
+    margin:0 auto 16px;
+    line-height:1.5;
+  }
+
+  .class-score{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .class-score span{
+    font-weight:700;
+    font-size:16px;
+  }
+
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:28px;
+  }
+
+  .stat-box{
+    background:var(--surface);
+    padding:20px 16px;
+    text-align:center;
+    transition:background 0.2s;
+  }
+
+  .stat-box:hover{background:var(--surface-2);}
+
+  .stat-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+
+  .stat-value{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:22px;
+  }
+
+  .stat-value.down{color:var(--down);}
+  .stat-value.up{color:var(--up);}
+  .stat-value.warning{color:var(--warning);}
+  .stat-value.blue{color:var(--blue);}
+
+  .section-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:20px;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .section-title::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .roast-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+    margin-bottom:16px;
+    transition:all 0.3s ease;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .roast-card::before{
+    content:'';
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:4px;
+    background:var(--ink);
+    opacity:0;
+    transition:opacity 0.3s;
+  }
+
+  .roast-card:hover{
+    border-color:var(--line-2);
+    transform:translateX(4px);
+    box-shadow:0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .roast-card:hover::before{opacity:1;}
+
+  .roast-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+  }
+
+  .roast-icon{
+    font-size:28px;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--surface-2);
+    border-radius:10px;
+  }
+
+  .roast-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+
+  .roast-severity{
+    margin-left:auto;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:6px;
+    background:var(--surface-2);
+    color:var(--muted);
+  }
+
+  .roast-severity.high{background:rgba(239,68,68,0.15); color:var(--down);}
+  .roast-severity.medium{background:rgba(245,158,11,0.15); color:var(--warning);}
+  .roast-severity.low{background:rgba(34,197,94,0.15); color:var(--up);}
+
+  .roast-text{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--paper);
+    padding-left:52px;
+  }
+
+  .trade-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
+    margin-bottom:24px;
+  }
+
+  .trade-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+  }
+
+  .trade-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+
+  .trade-value{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:20px;
+  }
+
+  .trade-value.positive{color:var(--up);}
+  .trade-value.negative{color:var(--down);}
+
+  .countertrade-panel{
+    background:var(--surface);
+    border:2px solid var(--line);
+    border-radius:16px;
+    padding:28px;
+    margin-bottom:28px;
+  }
+
+  .countertrade-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  .countertrade-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:18px;
+  }
+
+  .countertrade-badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    padding:6px 14px;
+    border-radius:8px;
+    font-weight:600;
+  }
+
+  .countertrade-badge.strong{background:rgba(239,68,68,0.15); color:var(--down);}
+  .countertrade-badge.moderate{background:rgba(245,158,11,0.15); color:var(--warning);}
+  .countertrade-badge.copy{background:rgba(34,197,94,0.15); color:var(--up);}
+  .countertrade-badge.neutral{background:var(--surface-2); color:var(--muted);}
+
+  .countertrade-outcome{
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.6;
+    margin-bottom:20px;
+    padding:16px;
+    background:var(--surface-2);
+    border-radius:10px;
+  }
+
+  .countertrade-actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .counter-action{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    background:var(--surface-2);
+    border-radius:10px;
+    border:1px solid var(--line);
+  }
+
+  .counter-action-badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:6px;
+    white-space:nowrap;
+  }
+
+  .counter-action-badge.buy{background:rgba(34,197,94,0.15); color:var(--up);}
+  .counter-action-badge.sell{background:rgba(239,68,68,0.15); color:var(--down);}
+
+  .counter-action-text{
+    font-size:13px;
+    color:var(--muted);
+    flex:1;
+  }
+
+  .counter-action-mint{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+  }
+
+  .factors-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:12px;
+    margin-bottom:24px;
+  }
+
+  .factor-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px;
+  }
+
+  .factor-name{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+
+  .factor-value{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:18px;
+  }
+
+  .factor-bar{
+    height:4px;
+    background:var(--surface-2);
+    border-radius:2px;
+    margin-top:8px;
+    overflow:hidden;
+  }
+
+  .factor-fill{
+    height:100%;
+    border-radius:2px;
+    transition:width 0.5s ease;
+  }
+
+  .leaderboard-table{
+    width:100%;
+    border-collapse:collapse;
+  }
+
+  .leaderboard-table th{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:12px 16px;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+  }
+
+  .leaderboard-table td{
+    padding:14px 16px;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+
+  .leaderboard-table tr:hover td{background:var(--surface-2);}
+
+  .lb-rank{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    width:50px;
+  }
+
+  .lb-addr{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .lb-class{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:6px;
+    display:inline-block;
+  }
+
+  .lb-score{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+  }
+
+  .share-section{
+    margin-top:32px;
+    text-align:center;
+    padding:24px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+
+  .share-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:16px;
+    margin-bottom:16px;
+  }
+
+  .share-btns{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .share-btn{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    padding:12px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    border:none;
+    transition:all 0.2s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .share-btn.twitter{background:#1DA1F2; color:#fff;}
+  .share-btn.twitter:hover{background:#0d8bd9; transform:translateY(-2px);}
+
+  .share-btn.copy{background:var(--surface-2); color:var(--paper); border:1px solid var(--line);}
+  .share-btn.copy:hover{border-color:var(--ink);}
+
+  .share-btn.leaderboard{background:var(--accent); color:#fff;}
+  .share-btn.leaderboard:hover{background:#7C3AED; transform:translateY(-2px);}
+
+  footer{
+    margin-top:60px;
+    text-align:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.8;
+  }
+
+  footer span{color:var(--ink);}
+
+  @media(max-width:640px){
+    .logo{font-size:28px;}
+    .stats-grid{grid-template-columns:repeat(2, 1fr);}
+    .trade-grid{grid-template-columns:1fr;}
+    .class-name{font-size:24px;}
+    .roast-text{padding-left:0; margin-top:12px;}
+    .roast-header{flex-wrap:wrap;}
+    .factors-grid{grid-template-columns:1fr;}
+    .countertrade-header{flex-direction:column; align-items:flex-start;}
+  }
+
+  .error-panel{
+    display:none;
+    background:rgba(239,68,68,0.1);
+    border:1px solid var(--down);
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:24px;
+  }
+
+  .error-panel.show{display:block;}
+
+  .error-text{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--down);
+  }
+
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">🔥 RUGPULL ROULETTE</div>
+    <div class="tagline">Paste a wallet. <span>Get roasted.</span> Or <span>get classified.</span></div>
+  </header>
+
+  <div class="mode-switch">
+    <button class="mode-btn active" data-mode="roast">🔥 Roast Mode</button>
+    <button class="mode-btn" data-mode="classify">📊 Classify Mode</button>
+    <button class="mode-btn" data-mode="leaderboard">🏆 Leaderboard</button>
+  </div>
+
+  <div class="tab-panel active" id="panel-roast">
+    <div class="search-panel">
+      <div class="search-row">
+        <input type="text" id="roastInput" placeholder="Paste a Solana wallet address...">
+        <button class="action-btn" id="roastBtn">🔥 ROAST ME</button>
+      </div>
+      <div class="hint">
+        <span>⚡</span> We only read public on-chain data. Nothing is stored. <span>Your shame is temporary.</span>
+      </div>
+    </div>
+
+    <div class="error-panel" id="roastError">
+      <div class="error-text" id="roastErrorText"></div>
+    </div>
+
+    <div class="loading" id="roastLoading">
+      <div class="loading-text">
+        <span>A</span><span>n</span><span>a</span><span>l</span><span>y</span><span>z</span><span>i</span><span>n</span><span>g</span>
+        <span style="margin-left:8px">y</span><span>o</span><span>u</span><span>r</span>
+        <span style="margin-left:8px">l</span><span>i</span><span>f</span><span>e</span><span>.</span><span>.</span><span>.</span>
+      </div>
+      <div class="loading-sub">Scanning balances, transactions, and bad decisions...</div>
+    </div>
+
+    <div class="results" id="roastResults">
+      <div class="class-banner" id="roastBanner">
+        <span class="class-icon" id="roastIcon">🔴</span>
+        <div class="class-label">WALLET CLASSIFICATION</div>
+        <div class="class-name" id="roastClassName">EXIT LIQUIDITY</div>
+        <div class="class-desc" id="roastSummary">This wallet belongs in a museum. Not the good kind.</div>
+        <div class="class-score">Degen Score: <span id="roastScore">8.5</span>/10</div>
+      </div>
+
+      <div class="stats-grid" id="roastStats">
+        <div class="stat-box">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value" id="rStatValue">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">SOL Balance</div>
+          <div class="stat-value" id="rStatSol">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Tokens</div>
+          <div class="stat-value" id="rStatTokens">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">NFTs</div>
+          <div class="stat-value" id="rStatNfts">—</div>
+        </div>
+      </div>
+
+      <div class="section-title">🔥 THE ROASTS</div>
+      <div id="roastsContainer"></div>
+
+      <div class="share-section">
+        <div class="share-title">Think you can handle worse? Share the pain.</div>
+        <div class="share-btns">
+          <button class="share-btn twitter" id="rShareTwitter">🐦 Share on X</button>
+          <button class="share-btn copy" id="rCopyLink">📋 Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panel-classify">
+    <div class="search-panel">
+      <div class="search-row">
+        <input type="text" id="classifyInput" placeholder="Paste a Solana wallet address...">
+        <button class="action-btn" id="classifyBtn">📊 CLASSIFY</button>
+      </div>
+      <div class="hint">
+        <span>🎯</span> Analyzes trade patterns, win rate, and behavior. <span>Are you smart money or exit liquidity?</span>
+      </div>
+    </div>
+
+    <div class="error-panel" id="classifyError">
+      <div class="error-text" id="classifyErrorText"></div>
+    </div>
+
+    <div class="loading" id="classifyLoading">
+      <div class="loading-text">
+        <span>C</span><span>l</span><span>a</span><span>s</span><span>s</span><span>i</span><span>f</span><span>y</span><span>i</span><span>n</span><span>g</span>
+        <span style="margin-left:8px">t</span><span>r</span><span>a</span><span>d</span><span>e</span><span>s</span><span>.</span><span>.</span><span>.</span>
+      </div>
+      <div class="loading-sub">Calculating win rates, hold times, and bot probability...</div>
+    </div>
+
+    <div class="results" id="classifyResults">
+      <div class="class-banner" id="classifyBanner">
+        <span class="class-icon" id="classifyIcon">🔴</span>
+        <div class="class-label">EXIT LIQUIDITY DETECTOR</div>
+        <div class="class-name" id="classifyClassName">EXIT LIQUIDITY</div>
+        <div class="class-desc" id="classifyDesc">You exist to make other people rich.</div>
+        <div class="class-score">Degen Score: <span id="classifyScore">75</span>/100</div>
+      </div>
+
+      <div class="stats-grid" id="classifyStats">
+        <div class="stat-box">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value" id="cStatValue">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">SOL Balance</div>
+          <div class="stat-value" id="cStatSol">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value" id="cStatWinRate">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Total Trades</div>
+          <div class="stat-value" id="cStatTrades">—</div>
+        </div>
+      </div>
+
+      <div class="section-title">📊 TRADE ANALYSIS</div>
+      <div class="trade-grid" id="tradeGrid">
+        <div class="trade-card">
+          <div class="trade-label">Profitable Trades</div>
+          <div class="trade-value positive" id="tProfitable">—</div>
+        </div>
+        <div class="trade-card">
+          <div class="trade-label">Losing Trades</div>
+          <div class="trade-value negative" id="tLosing">—</div>
+        </div>
+        <div class="trade-card">
+          <div class="trade-label">Net P&L (SOL)</div>
+          <div class="trade-value" id="tNetPnl">—</div>
+        </div>
+      </div>
+
+      <div class="section-title">🎯 CLASSIFICATION FACTORS</div>
+      <div class="factors-grid" id="factorsGrid"></div>
+
+      <div class="section-title">🔄 COUNTERTRADE RECOMMENDATION</div>
+      <div class="countertrade-panel" id="countertradePanel">
+        <div class="countertrade-header">
+          <div class="countertrade-title">Strategy</div>
+          <div class="countertrade-badge strong" id="ctBadge">STRONG COUNTERTRADE</div>
+        </div>
+        <div class="countertrade-outcome" id="ctOutcome">
+          Historically, doing the opposite of this wallet is highly profitable.
+        </div>
+        <div class="countertrade-actions" id="ctActions"></div>
+      </div>
+
+      <div class="share-section">
+        <div class="share-title">Expose your trading skills. Or lack thereof.</div>
+        <div class="share-btns">
+          <button class="share-btn twitter" id="cShareTwitter">🐦 Share on X</button>
+          <button class="share-btn copy" id="cCopyLink">📋 Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panel-leaderboard">
+    <div class="search-panel">
+      <div class="search-row" style="justify-content:center;">
+        <button class="mode-btn active" id="lbWorst" style="margin:0;">🔥 Worst Degens</button>
+        <button class="mode-btn" id="lbBest" style="margin:0;">👑 Smart Money</button>
+      </div>
+      <div class="hint" style="text-align:center;">
+        <span>🏆</span> Wallets ranked by their degen score. <span>Higher = more roasted.</span>
+      </div>
+    </div>
+
+    <div class="loading" id="lbLoading">
+      <div class="loading-text">
+        <span>L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span>
+        <span style="margin-left:8px">d</span><span>e</span><span>g</span><span>e</span><span>n</span><span>s</span><span>.</span><span>.</span><span>.</span>
+      </div>
+    </div>
+
+    <div class="results" id="lbResults">
+      <div class="section-title">🏆 DEGEN LEADERBOARD</div>
+      <div style="overflow-x:auto;">
+        <table class="leaderboard-table" id="lbTable">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Wallet</th>
+              <th>Classification</th>
+              <th>Score</th>
+              <th>Portfolio</th>
+              <th>Lookups</th>
+            </tr>
+          </thead>
+          <tbody id="lbBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Built for degens, by degens. <span>No wallets were harmed</span> in the making of this roast.<br>
+    Data via Helius + Jupiter. Not financial advice. Don't @ us.
+  </footer>
+</div>
+
+<script>
+const API_BASE = '';
+const $ = id => document.getElementById(id);
+
+function fmtUsd(n){
+  if(n===null||n===undefined||isNaN(n)) return '$0';
+  if(n<0.01) return '<$0.01';
+  if(n<1000) return '$'+n.toFixed(2);
+  return '$'+n.toLocaleString('en-US',{maximumFractionDigits:0});
+}
+
+function fmtNum(n, d=4){
+  if(n===null||n===undefined||isNaN(n)) return '0';
+  return n.toLocaleString('en-US',{maximumFractionDigits:d});
+}
+
+function fmtSol(n){
+  if(n===null||n===undefined||isNaN(n)) return '0 SOL';
+  return (n>0?'+':'') + n.toFixed(4) + ' SOL';
+}
+
+document.querySelectorAll('.mode-btn[data-mode]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    $('panel-'+btn.dataset.mode).classList.add('active');
+    if(btn.dataset.mode === 'leaderboard') loadLeaderboard('worst');
+  });
+});
+
+// ===== ROAST MODE =====
+$('roastBtn').addEventListener('click', ()=>doRoast());
+$('roastInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doRoast(); });
+
+async function doRoast(){
+  const address = $('roastInput').value.trim();
+  if(!address){ showError('roast', 'Paste a wallet address first, degen.'); return; }
+  $('roastError').classList.remove('show');
+  $('roastResults').classList.remove('show');
+  $('roastLoading').classList.add('show');
+  $('roastBtn').disabled = true;
+  try{
+    const res = await fetch(`${API_BASE}/api/roast?address=${address}`);
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Something went wrong');
+    renderRoast(data, address);
+  }catch(err){
+    showError('roast', err.message);
+  }finally{
+    $('roastLoading').classList.remove('show');
+    $('roastBtn').disabled = false;
+  }
+}
+
+function renderRoast(data, address){
+  $('roastIcon').textContent = data.classificationIcon;
+  $('roastClassName').textContent = data.classification;
+  $('roastClassName').style.color = data.classificationColor;
+  $('roastSummary').textContent = data.summaryRoast;
+  $('roastScore').textContent = data.score;
+  $('roastBanner').style.borderColor = data.classificationColor;
+  $('rStatValue').textContent = fmtUsd(data.stats.totalValue);
+  $('rStatValue').className = 'stat-value ' + (data.stats.totalValue < 100 ? 'down' : data.stats.totalValue > 10000 ? 'up' : '');
+  $('rStatSol').textContent = fmtNum(data.stats.solBalance, 4) + ' SOL';
+  $('rStatSol').className = 'stat-value ' + (data.stats.solBalance < 0.1 ? 'down' : '');
+  $('rStatTokens').textContent = data.stats.tokenCount;
+  $('rStatNfts').textContent = data.stats.nftCount;
+  $('roastsContainer').innerHTML = data.roasts.map(r => `
+    <div class="roast-card">
+      <div class="roast-header">
+        <div class="roast-icon">${r.icon}</div>
+        <div class="roast-title">${r.title}</div>
+        <div class="roast-severity ${r.severity >= 7 ? 'high' : r.severity >= 4 ? 'medium' : 'low'}">${r.severity}/10</div>
+      </div>
+      <div class="roast-text">${r.text}</div>
+    </div>
+  `).join('');
+  setupShare('r', data, address);
+  $('roastResults').classList.add('show');
+}
+
+// ===== CLASSIFY MODE =====
+$('classifyBtn').addEventListener('click', ()=>doClassify());
+$('classifyInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doClassify(); });
+
+async function doClassify(){
+  const address = $('classifyInput').value.trim();
+  if(!address){ showError('classify', 'Paste a wallet address first, degen.'); return; }
+  $('classifyError').classList.remove('show');
+  $('classifyResults').classList.remove('show');
+  $('classifyLoading').classList.add('show');
+  $('classifyBtn').disabled = true;
+  try{
+    const res = await fetch(`${API_BASE}/api/classify?address=${address}`);
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Something went wrong');
+    renderClassify(data, address);
+  }catch(err){
+    showError('classify', err.message);
+  }finally{
+    $('classifyLoading').classList.remove('show');
+    $('classifyBtn').disabled = false;
+  }
+}
+
+function renderClassify(data, address){
+  const c = data.classification;
+  $('classifyIcon').textContent = c.classificationIcon;
+  $('classifyClassName').textContent = c.classification;
+  $('classifyClassName').style.color = c.classificationColor;
+  $('classifyDesc').textContent = c.description;
+  $('classifyScore').textContent = c.score;
+  $('classifyBanner').style.borderColor = c.classificationColor;
+  $('cStatValue').textContent = fmtUsd(data.stats.totalValue);
+  $('cStatValue').className = 'stat-value ' + (data.stats.totalValue < 100 ? 'down' : data.stats.totalValue > 10000 ? 'up' : '');
+  $('cStatSol').textContent = fmtNum(data.stats.solBalance, 4) + ' SOL';
+  $('cStatSol').className = 'stat-value ' + (data.stats.solBalance < 0.1 ? 'down' : '');
+  const ta = c.tradeAnalysis;
+  $('cStatWinRate').textContent = ta.totalTrades > 0 ? (ta.winRate * 100).toFixed(1) + '%' : 'N/A';
+  $('cStatWinRate').className = 'stat-value ' + (ta.winRate < 0.3 ? 'down' : ta.winRate > 0.6 ? 'up' : 'warning');
+  $('cStatTrades').textContent = ta.totalTrades;
+  $('tProfitable').textContent = ta.profitableTrades;
+  $('tLosing').textContent = ta.losingTrades;
+  $('tNetPnl').textContent = fmtSol(ta.netPnl);
+  $('tNetPnl').className = 'trade-value ' + (ta.netPnl >= 0 ? 'positive' : 'negative');
+  $('factorsGrid').innerHTML = c.factors.map(f => `
+    <div class="factor-card">
+      <div class="factor-name">${f.name}</div>
+      <div class="factor-value">${f.value}</div>
+      <div class="factor-bar">
+        <div class="factor-fill" style="width:${f.weight}%; background:${c.classificationColor};"></div>
+      </div>
+    </div>
+  `).join('');
+  const ct = data.countertrade;
+  $('ctBadge').textContent = ct.recommendation;
+  $('ctBadge').className = 'countertrade-badge ' + 
+    (ct.recommendation.includes('STRONG') ? 'strong' : 
+     ct.recommendation.includes('MODERATE') ? 'moderate' :
+     ct.recommendation.includes('COPY') ? 'copy' : 'neutral');
+  $('ctOutcome').textContent = ct.expectedOutcome;
+  $('ctActions').innerHTML = ct.recentTrades.map(t => `
+    <div class="counter-action">
+      <div class="counter-action-badge ${t.counter === 'BUY' ? 'buy' : 'sell'}">${t.counter}</div>
+      <div class="counter-action-text">${t.reasoning}</div>
+      <div class="counter-action-mint">${t.mint.slice(0,4)}…${t.mint.slice(-4)}</div>
+    </div>
+  `).join('');
+  setupShare('c', data, address);
+  $('classifyResults').classList.add('show');
+}
+
+// ===== LEADERBOARD =====
+let currentLbSort = 'worst';
+$('lbWorst').addEventListener('click', ()=>{
+  $('lbWorst').classList.add('active');
+  $('lbBest').classList.remove('active');
+  loadLeaderboard('worst');
+});
+$('lbBest').addEventListener('click', ()=>{
+  $('lbBest').classList.add('active');
+  $('lbWorst').classList.remove('active');
+  loadLeaderboard('best');
+});
+
+async function loadLeaderboard(sort){
+  currentLbSort = sort;
+  $('lbResults').classList.remove('show');
+  $('lbLoading').classList.add('show');
+  try{
+    const res = await fetch(`${API_BASE}/api/leaderboard?sort=${sort}&limit=20`);
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Failed to load leaderboard');
+    renderLeaderboard(data.entries, sort);
+  }catch(err){
+    $('lbBody').innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--down);">${err.message}</td></tr>`;
+    $('lbResults').classList.add('show');
+  }finally{
+    $('lbLoading').classList.remove('show');
+  }
+}
+
+function renderLeaderboard(entries, sort){
+  if(!entries || entries.length === 0){
+    $('lbBody').innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);">No wallets classified yet. Be the first degen!</td></tr>`;
+    $('lbResults').classList.add('show');
+    return;
+  }
+  $('lbBody').innerHTML = entries.map((e, i) => `
+    <tr>
+      <td class="lb-rank">#${i + 1}</td>
+      <td>
+        <div style="font-weight:600;">${e.shortAddr}</div>
+        <div class="lb-addr">${e.address.slice(0,8)}…${e.address.slice(-8)}</div>
+      </td>
+      <td>
+        <span class="lb-class" style="background:${e.classificationColor}20; color:${e.classificationColor}; border:1px solid ${e.classificationColor}40;">
+          ${e.classificationIcon} ${e.classification}
+        </span>
+      </td>
+      <td class="lb-score" style="color:${e.classificationColor}">${e.score}</td>
+      <td>${fmtUsd(e.totalValue)}</td>
+      <td style="color:var(--muted)">${e.lookups}x</td>
+    </tr>
+  `).join('');
+  $('lbResults').classList.add('show');
+}
+
+function showError(mode, msg){
+  $(mode+'ErrorText').textContent = msg;
+  $(mode+'Error').classList.add('show');
+}
+
+function setupShare(prefix, data, address){
+  const isRoast = prefix === 'r';
+  const shareText = encodeURIComponent(
+    `🔥 My wallet just got ${isRoast ? 'roasted' : 'classified'} on Rugpull Roulette!\n\n` +
+    `${isRoast ? 'Classification' : 'Label'}: ${isRoast ? data.classification : data.classification.classification}\n` +
+    `${isRoast ? data.summaryRoast : data.classification.description}\n\n` +
+    `Check yours: ${window.location.origin}?addr=${address}&mode=${isRoast ? 'roast' : 'classify'}`
+  );
+  $(prefix+'ShareTwitter').onclick = () => {
+    window.open(`https://twitter.com/intent/tweet?text=${shareText}`, '_blank');
+  };
+  $(prefix+'CopyLink').onclick = async () => {
+    const url = `${window.location.origin}?addr=${address}&mode=${isRoast ? 'roast' : 'classify'}`;
+    try{
+      await navigator.clipboard.writeText(url);
+      $(prefix+'CopyLink').textContent = '✅ Copied!';
+      setTimeout(()=>{ $(prefix+'CopyLink').textContent = '📋 Copy Link'; }, 2000);
+    }catch(e){}
+  };
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const addrParam = urlParams.get('addr');
+const modeParam = urlParams.get('mode');
+
+if(modeParam){
+  document.querySelectorAll('.mode-btn[data-mode]').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.mode-btn[data-mode="${modeParam}"]`)?.classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  $('panel-'+modeParam)?.classList.add('active');
+}
+
+if(addrParam){
+  if(modeParam === 'classify'){
+    $('classifyInput').value = addrParam;
+    doClassify();
+  } else {
+    $('roastInput').value = addrParam;
+    doRoast();
+  }
+}
+</script>
+</body>
+</html>

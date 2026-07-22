@@ -1,0 +1,14 @@
+{
+  "name": "rugpull-roulette",
+  "version": "2.0.0",
+  "description": "Solana Wallet Roast + Exit Liquidity Detector",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:pages": "wrangler pages deploy static"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
